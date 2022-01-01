@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>public</access>
+        <active>true</active>
+        <api_name>x_58872_needit.Date and Time utilities.</api_name>
+        <caller_access/>
+        <client_callable>true</client_callable>
+        <description>Courtesy of Ashutosh Munot.</description>
+        <name>Date and Time utilities.</name>
+        <script><![CDATA[var ClientDateTimeUtils = Class.create();
+ClientDateTimeUtils.prototype = Object.extendsObject(AbstractAjaxProcessor, {
+//Takes a Single Date/Time Field and returns its time difference from nowDateTime().
+//params = sysparm_fdt (the first date/time field), sysparm_difftype (time based format to return result. See "_calcDateDiff" function comments)
+getNowDateTimeDiff: function(){
+var firstDT = this.getParameter('sysparm_fdt'); //First Date-Time Field
+var diffTYPE = this.getParameter('sysparm_difftype'); // Date-Time Type to return the answer as. Can be second, minute, hour, day
+var diff = gs.dateDiff(gs.nowDateTime(), firstDT, true);
+var timediff = this._calcDateDiff(diffTYPE, diff);
+//return "getNowDateTimeDiff: FIRST DT: " + firstDT + " -DIFFTYPE: " + diffTYPE + " -TIME DIFF: " + timediff;
+return timediff;
+},
+
+//Private function to calculate the date difference return result in second, minute, hour, day.
+_calcDateDiff: function(diffTYPE, seconds){
+var thisdiff;
+if (diffTYPE == "day"){thisdiff = seconds/86400;}
+else if (diffTYPE == "hour"){thisdiff = seconds/3600;}
+else if (diffTYPE == "minute"){thisdiff = seconds/60;}
+else if (diffTYPE == "second"){thisdiff = seconds;}
+else {thisdiff = seconds;}
+return thisdiff;
+}
+
+
+});
+]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2021-12-31 23:54:08</sys_created_on>
+        <sys_id>6fe148d91b3401107ae5c991604bcb8e</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Date and Time utilities.</sys_name>
+        <sys_package display_value="NeedIt" source="x_58872_needit">6ead8e780f603200cd674f8ce1050ed1</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="NeedIt">6ead8e780f603200cd674f8ce1050ed1</sys_scope>
+        <sys_update_name>sys_script_include_6fe148d91b3401107ae5c991604bcb8e</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2021-12-31 23:54:08</sys_updated_on>
+    </sys_script_include>
+</record_update>
